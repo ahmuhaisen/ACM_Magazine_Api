@@ -31,4 +31,25 @@ public class IssuesController(IIssuesRepository _repo, ILogger<IssuesController>
 
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("{issueId:int}")]
+    public async Task<IActionResult> GetValue(int issueId)
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpGet]
+    [Route("{issueId:int}/team")]
+    public async Task<IActionResult> GetIssueTeam(int issueId)
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpGet]
+    [Route("{issueId:int}/team/{roleId:int}")]
+    public async Task<IActionResult> GetIssueTeamWithRole(int issueId, int roleId)
+    {
+        throw new NotImplementedException();
+    }
 }
