@@ -1,8 +1,18 @@
 ﻿namespace Magazine.Api.Shared;
 
-public class ApiResponse<T> where T : class
+public class ApiResponse
 {
-    public bool Success { get; set; }
+    public bool IsSuccess { get; set; }
     public string? Message { get; set; }
-    public T? Data { get; set; }
+
+    public static ApiResponse Failure(string message) => new ApiResponse
+    {
+        IsSuccess = false,
+        Message = message
+    };
+
+    public static ApiResponse Success() => new ApiResponse
+    {
+        IsSuccess = true
+    };
 }
