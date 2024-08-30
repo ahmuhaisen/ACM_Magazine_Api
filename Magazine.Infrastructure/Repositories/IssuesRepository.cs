@@ -5,7 +5,7 @@ using Magazine.Infrastructure.Data;
 namespace Magazine.Infrastructure.Repositories;
 public class IssuesRepository : Repository<Issue>, IIssuesRepository
 {
-    public IssuesRepository(ApplicationDbContext _db) : base(_db)
+    public IssuesRepository(ApplicationDbContext db) : base(db)
     {
     }
 }
