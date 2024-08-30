@@ -8,6 +8,8 @@ public class Repository<T>(ApplicationDbContext _db) : IRepository<T> where T : 
 {
     public async Task<IEnumerable<T>> GetAllAsync()
     {
-        return await _db.Set<T>().ToListAsync();
+        return await _db.Set<T>()
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
