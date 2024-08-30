@@ -1,4 +1,6 @@
-﻿using Magazine.Infrastructure.Abstractions;
+﻿using Magazine.Application.Abstractions;
+using Magazine.Application.Services;
+using Magazine.Infrastructure.Abstractions;
 using Magazine.Infrastructure.Data;
 using Magazine.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +19,10 @@ public static class ProgramExtensions
         return services;
     }
 
-    public static IServiceCollection AddRepositories(this IServiceCollection services)
+    public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IIssuesRepository, IssuesRepository>();
+        services.AddScoped<IIssuesService, IssuesService>();
 
         return services;
     }

@@ -1,5 +1,6 @@
 using Serilog;
 using Magazine.Api;
+using Magazine.Application.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +15,11 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
 builder.Services.AddDatabaseContext(builder.Configuration);
 
-builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 
 var app = builder.Build();

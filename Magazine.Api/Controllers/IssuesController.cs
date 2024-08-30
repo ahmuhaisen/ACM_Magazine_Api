@@ -1,23 +1,22 @@
 ﻿using Magazine.Api.Shared;
-using Magazine.Domain.Entities;
+using Magazine.Application.Abstractions;
+using Magazine.Application.DTOs;
 using Magazine.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Magazine.Api.Controllers;
 
 [Route("api/[controller]")]
-public class IssuesController(IIssuesRepository _repo, ILogger<IssuesController> _logger) : ControllerBase
+public class IssuesController(IIssuesService _issuesService, ILogger<IssuesController> _logger) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        await Task.Delay(2000);
-
-        var response = new ApiResponse<IEnumerable<Issue>>();
+        var response = new ApiResponse<IEnumerable<IssueDTO>>();
 
         try
         {
-            var data = await _repo.GetAllAsync();
+            var data = await _issuesService.GetAllAsync();
             response.Success = true;
             response.Data = data;
         }

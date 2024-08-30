@@ -13,10 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Magazine.Domain\Magazine.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DTOs\" />
+    <ProjectReference Include="..\Magazine.Infrastructure\Magazine.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
