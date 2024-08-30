@@ -10,6 +10,9 @@ public class ApplicationDbContext : DbContext
 
 
     public DbSet<Issue> Issues { get; set; }
+    public DbSet<Volunteer> Volunteers { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Contribution> Contributions { get; set; }
 
 
 

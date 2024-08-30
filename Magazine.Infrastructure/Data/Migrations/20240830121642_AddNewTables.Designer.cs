@@ -4,6 +4,7 @@ using Magazine.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Magazine.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240830121642_AddNewTables")]
+    partial class AddNewTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,34 +24,6 @@ namespace Magazine.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Magazine.Domain.Entities.Contribution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IssueId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("RoleId")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("VolunteerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IssueId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("VolunteerId");
-
-                    b.ToTable("Contributions", (string)null);
-                });
 
             modelBuilder.Entity("Magazine.Domain.Entities.Issue", b =>
                 {
@@ -83,7 +58,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Issues", (string)null);
+                    b.ToTable("Issues");
 
                     b.HasData(
                         new
@@ -122,7 +97,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Magazine.Domain.Entities.Volunteer", b =>
@@ -153,10 +128,38 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Volunteers", (string)null);
+                    b.ToTable("Volunteers");
                 });
 
-            modelBuilder.Entity("Magazine.Domain.Entities.Contribution", b =>
+            modelBuilder.Entity("Magazine.Domain.Entities.VolunteersRoles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IssueId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("RoleId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("VolunteerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssueId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("VolunteerId");
+
+                    b.ToTable("VolunteersRoles");
+                });
+
+            modelBuilder.Entity("Magazine.Domain.Entities.VolunteersRoles", b =>
                 {
                     b.HasOne("Magazine.Domain.Entities.Issue", "Issue")
                         .WithMany()
@@ -171,7 +174,7 @@ namespace Magazine.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Magazine.Domain.Entities.Volunteer", "Volunteer")
-                        .WithMany("Contributions")
+                        .WithMany()
                         .HasForeignKey("VolunteerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -181,11 +184,6 @@ namespace Magazine.Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("Volunteer");
-                });
-
-            modelBuilder.Entity("Magazine.Domain.Entities.Volunteer", b =>
-                {
-                    b.Navigation("Contributions");
                 });
 #pragma warning restore 612, 618
         }

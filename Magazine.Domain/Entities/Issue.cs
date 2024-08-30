@@ -10,4 +10,6 @@ public class Issue : IEntity
     public int Number { get; set; }
     public DateTime PublishedAt { get; set; }
     public required string CoverImageUrl { get; set; }
+
+    public ICollection<Contribution> Contributions { get; set; } = [];
 }

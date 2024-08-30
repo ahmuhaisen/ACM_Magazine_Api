@@ -4,6 +4,7 @@ using Magazine.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Magazine.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240830122538_ChangeVolunteersRolesToContributions")]
+    partial class ChangeVolunteersRolesToContributions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasIndex("VolunteerId");
 
-                    b.ToTable("Contributions", (string)null);
+                    b.ToTable("Contributions");
                 });
 
             modelBuilder.Entity("Magazine.Domain.Entities.Issue", b =>
@@ -83,7 +86,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Issues", (string)null);
+                    b.ToTable("Issues");
 
                     b.HasData(
                         new
@@ -122,7 +125,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Magazine.Domain.Entities.Volunteer", b =>
@@ -153,7 +156,7 @@ namespace Magazine.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Volunteers", (string)null);
+                    b.ToTable("Volunteers");
                 });
 
             modelBuilder.Entity("Magazine.Domain.Entities.Contribution", b =>
