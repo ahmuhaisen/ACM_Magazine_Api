@@ -3,6 +3,7 @@ using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Magazine.Api.Controllers;
 
@@ -12,30 +13,34 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var response = new ApiResponse<IEnumerable<IssueDTO>>();
-
         try
         {
             var data = await _issuesService.GetAllAsync();
-            response.Success = true;
-            response.Data = data;
+            return Ok(ApiResult<IEnumerable<IssueDTO>>.Success(data));
         }
         catch (Exception ex)
         {
-            _logger.LogError("Exception Occurs in IssuesController.GetAllAsync {1}", ex.Message);
-            response.Success = false;
-            response.Message = $"Something went wrong, {ex.Message}";
-            return BadRequest(response);
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
         }
-
-        return Ok(response);
     }
 
     [HttpGet]
     [Route("{issueId:int}")]
     public async Task<IActionResult> GetValue(int issueId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var data = await _issuesService.GetByIdAsync(issueId);
+
+            if (data is not null)
+                return Ok(ApiResult<IssueDTO>.Success(data));
+            else
+                return Ok(ApiResponse.Failure($"Issue with Id {issueId} not found."));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
     }
 
     [HttpGet]

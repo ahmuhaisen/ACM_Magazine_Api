@@ -12,4 +12,9 @@ public class Repository<T>(ApplicationDbContext _db) : IRepository<T> where T : 
             .AsNoTracking()
             .ToListAsync();
     }
+
+    public async Task<T?> GetByIdAsync(int id)
+    {
+        return await _db.Set<T>().FindAsync(id);
+    }
 }

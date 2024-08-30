@@ -6,4 +6,5 @@ namespace Magazine.Application.Abstractions;
 public interface IIssuesService
 {
     Task<IEnumerable<IssueDTO>> GetAllAsync();
+    Task<IssueDTO> GetByIdAsync(int id);
 }

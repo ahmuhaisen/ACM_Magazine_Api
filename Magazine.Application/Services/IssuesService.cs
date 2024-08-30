@@ -20,4 +20,16 @@ public class IssuesService(IIssuesRepository _repo,
         
         return data;
     }
+
+    public async Task<IssueDTO> GetByIdAsync(int id)
+    {
+        var issue = await _repo.GetByIdAsync(id);
+
+        if (issue is null)
+            return null!;
+
+        var data = _mapper.Map<IssueDTO>(issue);
+
+        return data;
+    }
 }
