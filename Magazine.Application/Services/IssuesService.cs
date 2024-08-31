@@ -48,10 +48,15 @@ public class IssuesService(IIssuesRepository _repo,
         return data;
     }
 
-    public async Task<IEnumerable<Contribution>> TestIssueTeam(int issueId)
+    public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRole(int issueId, int roleId)
     {
-        return await _contributionRepo.GetContributionsByIssueId(issueId);
+        var contributions = await _contributionRepo.GetContributionsByIssueIdAndRoleId(issueId, roleId);
 
-      
+        if (contributions is null || !contributions.Any())
+            return Enumerable.Empty<IssueContributorDTO>();
+
+        var data = _mapper.Map<IEnumerable<IssueContributorDTO>>(contributions);
+
+        return data;
     }
 }

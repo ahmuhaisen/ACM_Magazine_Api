@@ -23,4 +23,14 @@ public class ContributionsRepository : Repository<Contribution>, IContributionsR
             .Include(c => c.Role)
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<Contribution>> GetContributionsByIssueIdAndRoleId(int issueId, int roleId)
+    {
+        return await _db.Contributions
+            .AsNoTracking()
+            .Where(c => c.IssueId == issueId && c.RoleId == roleId)
+            .Include(c => c.Volunteer)
+            .Include(c => c.Role)
+            .ToListAsync();
+    }
 }

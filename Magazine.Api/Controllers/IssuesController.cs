@@ -61,6 +61,19 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     [Route("{issueId:int}/team/{roleId:int}")]
     public async Task<IActionResult> GetIssueTeamWithRole(int issueId, int roleId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var data = await _issuesService.GetIssueTeamWithRole(issueId, roleId);
+
+            if(data.Any())
+                return Ok(ApiResult<IEnumerable<IssueContributorDTO>>.Success(data));
+
+            return Ok(ApiResponse.Failure("No Contributions found"));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
     }
 }
