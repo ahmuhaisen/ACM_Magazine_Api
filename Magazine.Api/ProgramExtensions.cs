@@ -19,9 +19,16 @@ public static class ProgramExtensions
         return services;
     }
 
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IIssuesRepository, IssuesRepository>();
+        services.AddScoped<IContributionsRepository, ContributionsRepository>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
         services.AddScoped<IIssuesService, IssuesService>();
 
         return services;

@@ -1,9 +1,7 @@
-﻿using Magazine.Api.Shared;
+﻿using Microsoft.AspNetCore.Mvc;
+using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
-using Magazine.Infrastructure.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Magazine.Api.Controllers;
 
@@ -47,7 +45,16 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     [Route("{issueId:int}/team")]
     public async Task<IActionResult> GetIssueTeam(int issueId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var data = await _issuesService.GetIssueTeam(issueId);
+            return Ok(ApiResult<IEnumerable<IssueContributorDTO>>.Success(data));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
     }
 
     [HttpGet]

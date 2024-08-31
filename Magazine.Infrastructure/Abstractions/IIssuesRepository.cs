@@ -3,5 +3,6 @@
 namespace Magazine.Infrastructure.Abstractions;
 public interface IIssuesRepository : IRepository<Issue>
 {
+    
 }
 

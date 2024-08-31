@@ -16,10 +16,9 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
 builder.Services.AddDatabaseContext(builder.Configuration);
-
-builder.Services.AddServices();
+builder.Services.AddApplicationServices();
+builder.Services.AddRepositories();
 
 
 var app = builder.Build();
