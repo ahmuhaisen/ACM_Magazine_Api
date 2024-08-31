@@ -59,6 +59,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
 
     [HttpGet]
     [Route("{issueId:int}/team/{roleId:int}")]
+    [EndpointDescription("Get all volunteers for a certain issue with a specific role (e.g. Director, Contributing Writers, ...etc)")]
     public async Task<IActionResult> GetIssueTeamWithRole(int issueId, int roleId)
     {
         try

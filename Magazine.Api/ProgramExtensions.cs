@@ -9,6 +9,8 @@ namespace Magazine.Api;
 
 public static class ProgramExtensions
 {
+
+
     public static IServiceCollection AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
