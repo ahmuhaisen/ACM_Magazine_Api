@@ -34,6 +34,18 @@ public class IssuesService(IIssuesRepository _repo,
         return data;
     }
 
+    public async Task<IssueDTO> GetLatestAsync()
+    {
+        var latest = await _repo.LatestAsync();
+
+        if (latest is null) return null!;
+
+        var data = _mapper.Map<IssueDTO>(latest);
+
+        return data;
+    }
+
+
     public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeam(int issueId)
     {
         var contributions = await _contributionRepo.GetContributionsByIssueId(issueId);

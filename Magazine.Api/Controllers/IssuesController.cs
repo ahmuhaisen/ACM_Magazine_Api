@@ -42,6 +42,21 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     }
 
     [HttpGet]
+    [Route("latest")]
+    public async Task<IActionResult> GetLatest()
+    {
+        try
+        {
+            var data = await _issuesService.GetLatestAsync();
+            return Ok(ApiResult<IssueDTO>.Success(data));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
+    }
+
+    [HttpGet]
     [Route("{issueId:int}/team")]
     public async Task<IActionResult> GetIssueTeam(int issueId)
     {
@@ -66,7 +81,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
         {
             var data = await _issuesService.GetIssueTeamWithRole(issueId, roleId);
 
-            if(data.Any())
+            if (data.Any())
                 return Ok(ApiResult<IEnumerable<IssueContributorDTO>>.Success(data));
 
             return Ok(ApiResponse.Failure("No Contributions found"));
