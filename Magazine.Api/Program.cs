@@ -1,17 +1,9 @@
 using Serilog;
 using Magazine.Api;
-using Magazine.Application.Profiles;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.EnableAnnotations();
-});
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -19,11 +11,10 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
-builder.Services.AddDatabaseContext(builder.Configuration);
-builder.Services.AddApplicationServices();
-builder.Services.AddRepositories();
-
+builder.Services
+    .AddPresentationServices()
+    .AddApplicationServices()
+    .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
