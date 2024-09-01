@@ -5,6 +5,7 @@ namespace Magazine.Application.DTOs;
 
 public class IssueDTO
 {
+    public int Id { get; set; }
     public required string Title { get; init; }
     public required string Description { get; init; }
     public byte Number { get; init; }

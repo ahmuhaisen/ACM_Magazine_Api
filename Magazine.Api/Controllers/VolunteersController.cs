@@ -58,4 +58,18 @@ public class VolunteersController(IVolunteersService _volunteersService) : Contr
             return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
         }
     }
+
+    [HttpGet("top/{number:int}")]
+    public async Task<IActionResult> GetTopContributors(int number)
+    {
+        try
+        {
+            var data = await _volunteersService.GetTopContributorsAsync(number);
+            return Ok(ApiResult<IEnumerable<VolunteerDTO>>.Success(data));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
+    }
 }

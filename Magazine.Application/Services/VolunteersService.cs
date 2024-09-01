@@ -31,7 +31,6 @@ public class VolunteersService(IVolunteersRepository _repo,
 
         return data;
     }
-    
 
     public async Task<VolunteerWithContributionsDTO> GetVolunteerWithContributionsByIdAsync(int id)
     {
@@ -41,6 +40,18 @@ public class VolunteersService(IVolunteersRepository _repo,
             return null!;
 
         var data = _mapper.Map<VolunteerWithContributionsDTO>(volunteer);
+
+        return data;
+    }
+
+    public async Task<IEnumerable<VolunteerDTO>> GetTopContributorsAsync(int number)
+    {
+        var volunteers = await _repo.GetTopContributorsAsync(number);
+
+        if (volunteers is null)
+            return Enumerable.Empty<VolunteerDTO>();
+
+        var data = _mapper.Map<IEnumerable<VolunteerDTO>>(volunteers);
 
         return data;
     }
