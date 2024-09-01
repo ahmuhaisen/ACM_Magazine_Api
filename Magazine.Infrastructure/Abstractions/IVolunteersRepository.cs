@@ -4,4 +4,5 @@ namespace Magazine.Infrastructure.Abstractions;
 
 public interface IVolunteersRepository : IRepository<Volunteer>
 {
+    Task<Volunteer?> GetWithContributionsAsync(int id);
 }

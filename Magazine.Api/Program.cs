@@ -40,6 +40,8 @@ app.UseCors(options =>
     options.AllowAnyOrigin();
 });
 
+app.UseStaticFiles();
+
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();

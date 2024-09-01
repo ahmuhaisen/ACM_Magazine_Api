@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\issues-covers\" />
+    <Folder Include="wwwroot\images\volunteers\" />
   </ItemGroup>
 
 </Project>

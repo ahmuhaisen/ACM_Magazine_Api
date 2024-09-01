@@ -1,5 +1,4 @@
 ﻿using Magazine.Application.DTOs;
-using Magazine.Domain.Entities;
 
 namespace Magazine.Application.Abstractions;
 
@@ -11,5 +10,3 @@ public interface IIssuesService
     Task<IEnumerable<IssueContributorDTO>> GetIssueTeam(int issueId);
     Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRole(int issueId, int roleId);
 }
-
-

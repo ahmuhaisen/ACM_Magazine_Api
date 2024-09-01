@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
-using Magazine.Domain.Entities;
 using Magazine.Infrastructure.Abstractions;
-using Microsoft.Extensions.Logging;
 
 namespace Magazine.Application.Services;
 
