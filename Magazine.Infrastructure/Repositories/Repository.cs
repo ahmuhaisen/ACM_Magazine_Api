@@ -25,6 +25,7 @@ public class Repository<T>(ApplicationDbContext _db) : IRepository<T> where T : 
                                                            Expression<Func<T, TKey>> orderByTerm)
     {
         var data = await _db.Set<T>()
+            .AsNoTracking()
             .OrderByDescending(orderByTerm)
             .Skip((pageIndex - 1) * pageSize)
             .Take(pageSize)
