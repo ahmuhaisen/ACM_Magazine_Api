@@ -1,4 +1,7 @@
-﻿namespace Magazine.Infrastructure.Abstractions;
+﻿using Magazine.Domain;
+using System.Linq.Expressions;
+
+namespace Magazine.Infrastructure.Abstractions;
 
 public interface IRepository<T> where T : class
 {
@@ -6,5 +9,5 @@ public interface IRepository<T> where T : class
 
     Task<T?> GetByIdAsync(int id);
 
-
+    Task<PaginatedList<T>> GetPageAsync<TKey>(int pageIndex, int pageSize, Expression<Func<T, TKey>> orderByTerm);
 }

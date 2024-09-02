@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Magazine.Application.DTOs;
 using Magazine.Application.Services.Helpers;
+using Magazine.Domain;
 using Magazine.Domain.Entities;
 
 namespace Magazine.Application.Profiles;
@@ -36,5 +37,7 @@ public class MappingProfile : Profile
             .ForCtorParam("IssueId", (opt) => opt.MapFrom(src => src.IssueId))
             .ForCtorParam("IssueTitle", (opt) => opt.MapFrom(src => src.Issue.Title))
             .ForCtorParam("Role", (opt) => opt.MapFrom(src => src.Role.Name));
+
+        CreateMap< PaginatedList<Issue>, PaginatedList<IssueDTO>>();
     }
 }

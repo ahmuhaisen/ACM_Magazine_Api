@@ -2,6 +2,7 @@
 using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
+using Magazine.Domain;
 
 namespace Magazine.Api.Controllers;
 
@@ -9,12 +10,12 @@ namespace Magazine.Api.Controllers;
 public class IssuesController(IIssuesService _issuesService, ILogger<IssuesController> _logger) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
     {
         try
         {
-            var data = await _issuesService.GetAllAsync();
-            return Ok(ApiResult<IEnumerable<IssueDTO>>.Success(data));
+            var data = await _issuesService.GetIssuesPage(pageIndex, pageSize);
+            return Ok(ApiResult<PaginatedList<IssueDTO>>.Success(data));
         }
         catch (Exception ex)
         {

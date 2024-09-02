@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
+using Magazine.Domain;
 using Magazine.Infrastructure.Abstractions;
 
 namespace Magazine.Application.Services;
@@ -66,6 +67,15 @@ public class IssuesService(IIssuesRepository _repo,
             return Enumerable.Empty<IssueContributorDTO>();
 
         var data = _mapper.Map<IEnumerable<IssueContributorDTO>>(contributions);
+
+        return data;
+    }
+
+    public async Task<PaginatedList<IssueDTO>> GetIssuesPage(int pageIndex, int pageSize)
+    {
+        var paginatedList = await _repo.GetPageAsync(pageIndex, pageSize, i => i.PublishedAt);
+
+        var data = _mapper.Map<PaginatedList<IssueDTO>>(paginatedList);
 
         return data;
     }
