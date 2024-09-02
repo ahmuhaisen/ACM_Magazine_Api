@@ -47,7 +47,7 @@ public class IssuesService(IIssuesRepository _repo,
     }
 
 
-    public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeam(int issueId)
+    public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeamAsync(int issueId)
     {
         var contributions = await _contributionRepo.GetContributionsByIssueId(issueId);
 
@@ -59,7 +59,7 @@ public class IssuesService(IIssuesRepository _repo,
         return data;
     }
 
-    public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRole(int issueId, int roleId)
+    public async Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRoleAsync(int issueId, int roleId)
     {
         var contributions = await _contributionRepo.GetContributionsByIssueIdAndRoleId(issueId, roleId);
 

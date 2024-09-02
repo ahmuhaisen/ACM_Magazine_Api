@@ -63,7 +63,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     {
         try
         {
-            var data = await _issuesService.GetIssueTeam(issueId);
+            var data = await _issuesService.GetIssueTeamAsync(issueId);
             return Ok(ApiResult<IEnumerable<IssueContributorDTO>>.Success(data));
         }
         catch (Exception ex)
@@ -80,7 +80,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     {
         try
         {
-            var data = await _issuesService.GetIssueTeamWithRole(issueId, roleId);
+            var data = await _issuesService.GetIssueTeamWithRoleAsync(issueId, roleId);
 
             if (data.Any())
                 return Ok(ApiResult<IEnumerable<IssueContributorDTO>>.Success(data));

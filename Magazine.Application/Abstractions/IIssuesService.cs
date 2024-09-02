@@ -10,7 +10,7 @@ public interface IIssuesService
     Task<IssueDTO> GetByIdAsync(int id);
     Task<IssueDTO> GetLatestAsync();
 
-    Task<IEnumerable<IssueContributorDTO>> GetIssueTeam(int issueId);
-    Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRole(int issueId, int roleId);
+    Task<IEnumerable<IssueContributorDTO>> GetIssueTeamAsync(int issueId);
+    Task<IEnumerable<IssueContributorDTO>> GetIssueTeamWithRoleAsync(int issueId, int roleId);
     Task<PaginatedList<IssueDTO>> GetIssuesPageAsync(int pageIndex, int pageSize);
 }
