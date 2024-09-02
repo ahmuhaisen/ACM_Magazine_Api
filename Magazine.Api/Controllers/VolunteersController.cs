@@ -59,8 +59,8 @@ public class VolunteersController(IVolunteersService _volunteersService) : Contr
         }
     }
 
-    [HttpGet("top/{number:int}")]
-    public async Task<IActionResult> GetTopContributors(int number)
+    [HttpGet("top")]
+    public async Task<IActionResult> GetTopContributors([FromQuery]int number = 3)
     {
         try
         {
