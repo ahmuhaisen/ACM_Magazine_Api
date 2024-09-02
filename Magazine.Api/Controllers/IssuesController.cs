@@ -14,7 +14,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
     {
         try
         {
-            var data = await _issuesService.GetIssuesPage(pageIndex, pageSize);
+            var data = await _issuesService.GetIssuesPageAsync(pageIndex, pageSize);
             return Ok(ApiResult<PaginatedList<IssueDTO>>.Success(data));
         }
         catch (Exception ex)

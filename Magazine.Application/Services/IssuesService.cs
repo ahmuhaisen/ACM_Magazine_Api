@@ -71,7 +71,7 @@ public class IssuesService(IIssuesRepository _repo,
         return data;
     }
 
-    public async Task<PaginatedList<IssueDTO>> GetIssuesPage(int pageIndex, int pageSize)
+    public async Task<PaginatedList<IssueDTO>> GetIssuesPageAsync(int pageIndex, int pageSize)
     {
         var paginatedList = await _repo.GetPageAsync(pageIndex, pageSize, i => i.PublishedAt);
 

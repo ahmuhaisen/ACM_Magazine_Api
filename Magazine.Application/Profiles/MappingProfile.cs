@@ -39,5 +39,6 @@ public class MappingProfile : Profile
             .ForCtorParam("Role", (opt) => opt.MapFrom(src => src.Role.Name));
 
         CreateMap< PaginatedList<Issue>, PaginatedList<IssueDTO>>();
+        CreateMap< PaginatedList<Volunteer>, PaginatedList<VolunteerDTO>>();
     }
 }

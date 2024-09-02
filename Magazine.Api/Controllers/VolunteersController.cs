@@ -1,6 +1,7 @@
 ﻿using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
+using Magazine.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Magazine.Api.Controllers;
@@ -9,12 +10,12 @@ namespace Magazine.Api.Controllers;
 public class VolunteersController(IVolunteersService _volunteersService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
     {
         try
         {
-            var data = await _volunteersService.GetAllAsync();
-            return Ok(ApiResult<IEnumerable<VolunteerDTO>>.Success(data));
+            var data = await _volunteersService.GetVolunteersPageAsync(pageIndex, pageSize);
+            return Ok(ApiResult<PaginatedList<VolunteerDTO>>.Success(data));
         }
         catch (Exception ex)
         {
