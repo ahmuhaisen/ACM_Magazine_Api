@@ -13,6 +13,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Volunteer> Volunteers { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Contribution> Contributions { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
 
 
