@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Magazine.Api.Controllers;
 
+
+[ApiController]
 [Route("api/[controller]")]
 public class VolunteersController(IVolunteersService _volunteersService) : ControllerBase
 {

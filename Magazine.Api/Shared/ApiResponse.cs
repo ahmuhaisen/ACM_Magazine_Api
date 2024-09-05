@@ -1,4 +1,6 @@
-﻿namespace Magazine.Api.Shared;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace Magazine.Api.Shared;
 
 public class ApiResponse
 {
@@ -9,6 +11,12 @@ public class ApiResponse
     {
         IsSuccess = false,
         Message = message
+    };
+
+    public static ApiResponse Failure(ModelStateDictionary modelState) => new ApiResponse
+    {
+        IsSuccess = false,
+        Message = string.Join(", ", modelState.Values.First().RawValue)
     };
 
     public static ApiResponse Success() => new ApiResponse

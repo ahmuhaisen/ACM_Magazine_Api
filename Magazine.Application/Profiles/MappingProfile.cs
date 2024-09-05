@@ -40,5 +40,8 @@ public class MappingProfile : Profile
 
         CreateMap< PaginatedList<Issue>, PaginatedList<IssueDTO>>();
         CreateMap< PaginatedList<Volunteer>, PaginatedList<VolunteerDTO>>();
+
+        CreateMap<Message, MessageDTO>();
+        CreateMap<MessageDTO, Message>();
     }
 }

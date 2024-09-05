@@ -53,12 +53,14 @@ public static class ProgramExtensions
         services.AddScoped<IIssuesRepository, IssuesRepository>();
         services.AddScoped<IContributionsRepository, ContributionsRepository>();
         services.AddScoped<IVolunteersRepository, VolunteersRepository>();
+        services.AddScoped<IMessagesRepository, MessagesRepository>();
     }
 
     private static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<IIssuesService, IssuesService>();
         services.AddScoped<IVolunteersService, VolunteersService>();
+        services.AddScoped<IMessagesService, MessagesService>();
     }
 
     private static void AddSwaggerServices(this IServiceCollection services)

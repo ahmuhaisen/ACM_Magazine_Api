@@ -6,6 +6,8 @@ using Magazine.Domain;
 
 namespace Magazine.Api.Controllers;
 
+
+[ApiController]
 [Route("api/[controller]")]
 public class IssuesController(IIssuesService _issuesService, ILogger<IssuesController> _logger) : ControllerBase
 {

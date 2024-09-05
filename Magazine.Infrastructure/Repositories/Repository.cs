@@ -36,4 +36,13 @@ public class Repository<T>(ApplicationDbContext _db) : IRepository<T> where T : 
 
         return new PaginatedList<T>(data, pageIndex, totalPages);
     }
+
+
+
+    public async Task<int> CreateAsync(T item)
+    {
+        await _db.Set<T>().AddAsync(item);
+        return await _db.SaveChangesAsync();
+    }
+
 }
