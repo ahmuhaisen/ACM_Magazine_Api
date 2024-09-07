@@ -11,16 +11,14 @@ public class IssuesService(IIssuesRepository _repo,
                            IContributionsRepository _contributionRepo,
                            IMapper _mapper) : IIssuesService
 {
-    public async Task<IEnumerable<IssueDTO>> GetAllAsync()
+    public async Task<IEnumerable<IssueShortInfo>> GetAllAsync()
     {
-        var allIssues = await _repo.GetAllAsync();
+        var allIssues = await _repo.GetAllShortAsync();
 
         if (allIssues is null)
-            return Enumerable.Empty<IssueDTO>();
+            return Enumerable.Empty<IssueShortInfo>();
 
-        var data = _mapper.Map<IEnumerable<IssueDTO>>(allIssues);
-
-        return data;
+        return allIssues;
     }
 
     public async Task<IssueDTO> GetByIdAsync(int id)

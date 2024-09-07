@@ -6,7 +6,7 @@ namespace Magazine.Application.Abstractions;
 
 public interface IIssuesService
 {
-    Task<IEnumerable<IssueDTO>> GetAllAsync();
+    Task<IEnumerable<IssueShortInfo>> GetAllAsync();
     Task<IssueDTO> GetByIdAsync(int id);
     Task<IssueDTO> GetLatestAsync();
 

@@ -12,12 +12,12 @@ namespace Magazine.Api.Controllers;
 public class IssuesController(IIssuesService _issuesService, ILogger<IssuesController> _logger) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
+    public async Task<IActionResult> GetAll()
     {
         try
         {
-            var data = await _issuesService.GetIssuesPageAsync(pageIndex, pageSize);
-            return Ok(ApiResult<PaginatedList<IssueDTO>>.Success(data));
+            var data = await _issuesService.GetAllAsync();
+            return Ok(ApiResult<IEnumerable<IssueShortInfo>>.Success(data));
         }
         catch (Exception ex)
         {
@@ -43,6 +43,7 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
             return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
         }
     }
+
 
     [HttpGet]
     [Route("latest")]
