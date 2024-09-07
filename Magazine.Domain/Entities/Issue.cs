@@ -6,10 +6,13 @@ public class Issue : IEntity
 
     public required string Title { get; set; }
     public required string Description { get; set; }
-    public int Year { get; set; }
+    //public int Year { get; set; }
     public int Number { get; set; }
     public DateTime PublishedAt { get; set; }
+    public int NumberOfArticles { get; set; }
     public required string CoverImageUrl { get; set; }
+    public required string FlipHtmlUrl { get; set; } = "UNKNOWN";
+    public required string DirectorNote { get; set; } = "UNKNOWN";
 
     public ICollection<Contribution> Contributions { get; set; } = [];
 }

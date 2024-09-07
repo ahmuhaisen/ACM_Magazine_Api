@@ -14,22 +14,13 @@ public class IssuesConfig : IEntityTypeConfiguration<Issue>
         builder.Property(i => i.Description)
             .HasMaxLength(100);
 
-        builder.HasData(SeedIssues());
-    }
+        builder.Property(i => i.CoverImageUrl)
+            .HasMaxLength(150);
 
-    private Issue[] SeedIssues()
-    {
-        return new Issue[]
-        {
-            new() {
-                Id = 1,
-                Number = 16,
-                Title= "Cyber Security",
-                Description="2024 issue highlights cybersecurity trends, challenges, and expert insights",
-                PublishedAt = new DateTime(2024, 4, 6),
-                Year = 2024,
-                CoverImageUrl = "issues-covers/16.png"
-            },
-        };
+        builder.Property(i => i.DirectorNote)
+            .HasMaxLength(500);
+
+        builder.Property(i => i.FlipHtmlUrl)
+            .HasMaxLength(350);
     }
 }
