@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
+using Magazine.Application.Services.Helpers;
 using Magazine.Domain;
 using Magazine.Infrastructure.Abstractions;
 
@@ -18,7 +19,17 @@ public class IssuesService(IIssuesRepository _repo,
         if (allIssues is null)
             return Enumerable.Empty<IssueShortInfo>();
 
-        return allIssues;
+        var data = allIssues.Select(i => new IssueShortInfo
+        {
+            Id = i.Id,
+            Title = i.Title,
+            Description = i.Description,
+            PublishedAt = i.PublishedAt,
+            Number = i.Number,
+            CoverImageUrl = FileManager.IssuesCoverImagesPath + "/" + i.CoverImageUrl,
+        });
+
+        return data;
     }
 
     public async Task<IssueDTO> GetByIdAsync(int id)
@@ -37,7 +48,8 @@ public class IssuesService(IIssuesRepository _repo,
     {
         var latest = await _repo.LatestAsync();
 
-        if (latest is null) return null!;
+        if (latest is null)
+            return null!;
 
         var data = _mapper.Map<IssueDTO>(latest);
 
