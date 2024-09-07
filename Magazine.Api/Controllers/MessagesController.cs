@@ -15,12 +15,13 @@ public class MessagesController(IMessagesService _messagesService) : ControllerB
     {
         try
         {
-            var createdMessageId = await _messagesService.CreateAsync(message);
+            await Task.Delay(3000);
+            var affectedRows = await _messagesService.CreateAsync(message);
 
-            if (createdMessageId == 0 || createdMessageId == -1)
+            if (affectedRows == 0 || affectedRows == -1)
                 return BadRequest(ApiResponse.Failure($"Message Creation Failed"));
 
-            return Ok(ApiResult<int>.Success(createdMessageId, "Message sent successfully"));
+            return Ok(ApiResult<int>.Success(affectedRows, "Message sent successfully"));
         }
         catch (Exception ex)
         {

@@ -34,9 +34,9 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
             var data = await _issuesService.GetByIdAsync(issueId);
 
             if (data is not null)
-                return Ok(ApiResult<IssueDTO>.Success(data));
+                return Ok(data);
             else
-                return Ok(ApiResponse.Failure($"Issue with Id {issueId} not found."));
+                return NotFound();
         }
         catch (Exception ex)
         {
