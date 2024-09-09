@@ -62,6 +62,7 @@ public static class ProgramExtensions
         services.AddScoped<IContributionsRepository, ContributionsRepository>();
         services.AddScoped<IVolunteersRepository, VolunteersRepository>();
         services.AddScoped<IMessagesRepository, MessagesRepository>();
+        services.AddScoped<IArticlesRepository, ArticlesRepository>();
     }
 
     private static void AddServices(this IServiceCollection services)
@@ -69,6 +70,7 @@ public static class ProgramExtensions
         services.AddScoped<IIssuesService, IssuesService>();
         services.AddScoped<IVolunteersService, VolunteersService>();
         services.AddScoped<IMessagesService, MessagesService>();
+        services.AddScoped<IArticlesService, ArticlesServices>();
     }
 
     private static void AddSwaggerServices(this IServiceCollection services)
