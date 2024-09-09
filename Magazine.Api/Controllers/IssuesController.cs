@@ -3,13 +3,16 @@ using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Domain;
+using Magazine.Application.Services;
 
 namespace Magazine.Api.Controllers;
 
 
 [ApiController]
 [Route("api/[controller]")]
-public class IssuesController(IIssuesService _issuesService, ILogger<IssuesController> _logger) : ControllerBase
+public class IssuesController(IIssuesService _issuesService,
+                              IArticlesService _articlesService,
+                              ILogger<IssuesController> _logger) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -72,6 +75,22 @@ public class IssuesController(IIssuesService _issuesService, ILogger<IssuesContr
         catch (Exception ex)
         {
             _logger.LogError(ex.ToString());
+            return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
+        }
+    }
+
+    [HttpGet]
+    [Route("{issueId:int}/articles")]
+    public async Task<IActionResult> GetIssueArticles(int issueId)
+    {
+        try
+        {
+            var data = await _articlesService.GetArticlesByIssueId(issueId);
+            return Ok(ApiResult<IEnumerable<ArticleDTO>>.Success(data));
+
+        }
+        catch (Exception ex)
+        {
             return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
         }
     }
