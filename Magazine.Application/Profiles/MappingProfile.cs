@@ -43,5 +43,7 @@ public class MappingProfile : Profile
 
         CreateMap<Message, MessageDTO>();
         CreateMap<MessageDTO, Message>();
+
+        CreateMap<ArticleDTO, Article>();
     }
 }

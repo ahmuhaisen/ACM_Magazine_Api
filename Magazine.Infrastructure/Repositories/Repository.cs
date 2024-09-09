@@ -37,6 +37,13 @@ public class Repository<T>(ApplicationDbContext _db) : IRepository<T> where T : 
         return new PaginatedList<T>(data, pageIndex, totalPages);
     }
 
+    public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter)
+    {
+        return await _db.Set<T>()
+            .AsNoTracking()
+            .Where(filter)
+            .ToListAsync();
+    }
 
 
     public async Task<int> CreateAsync(T item)

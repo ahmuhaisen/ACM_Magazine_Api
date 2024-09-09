@@ -12,4 +12,5 @@ public interface IRepository<T> where T : class
     Task<PaginatedList<T>> GetPageAsync<TKey>(int pageIndex, int pageSize, Expression<Func<T, TKey>> orderByTerm);
 
     Task<int> CreateAsync(T item);
+    Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter);
 }

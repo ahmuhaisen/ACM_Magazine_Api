@@ -1,0 +1,7 @@
+﻿namespace Magazine.Application.DTOs;
+
+
+public class ArticleDTO
+{
+    public required string Title { get; set; }
+}
