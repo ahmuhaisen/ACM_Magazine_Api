@@ -8,7 +8,7 @@ namespace Magazine.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class MessagesController(IMessagesService _messagesService) : ControllerBase
+public class ContactController(IMessagesService _messagesService) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] MessageDTO message)
