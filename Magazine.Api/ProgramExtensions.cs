@@ -11,19 +11,7 @@ namespace Magazine.Api;
 
 public static class ProgramExtensions
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddRepositories();
-        services.AddDatabaseContextWithLogging(configuration);
-        return services;
-    }
 
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-    {
-        services.AddServices();
-        services.AddAutoMapper(typeof(MappingProfile).Assembly);
-        return services;
-    }
 
     public static IServiceCollection AddPresentationServices(this IServiceCollection services)
     {
@@ -36,6 +24,23 @@ public static class ProgramExtensions
                 .AllowAnyMethod();
             })
         );
+
+        services.AddCaching();
+
+        return services;
+    }
+
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
+        services.AddServices();
+        services.AddAutoMapper(typeof(MappingProfile).Assembly);
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddRepositories();
+        services.AddDatabaseContextWithLogging(configuration);
         return services;
     }
 
@@ -79,6 +84,14 @@ public static class ProgramExtensions
         services.AddSwaggerGen(options =>
         {
             options.EnableAnnotations();
+        });
+    }
+
+    private static void AddCaching(this IServiceCollection services)
+    {
+        services.AddOutputCache(options =>
+        {
+            options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromSeconds(15)));
         });
     }
 }

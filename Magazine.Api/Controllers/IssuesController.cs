@@ -3,12 +3,14 @@ using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Domain;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Magazine.Api.Controllers;
 
 
 [ApiController]
 [Route("api/[controller]")]
+[OutputCache]
 public class IssuesController(IIssuesService _issuesService,
                               IArticlesService _articlesService,
                               ILogger<IssuesController> _logger) : ControllerBase
@@ -18,6 +20,7 @@ public class IssuesController(IIssuesService _issuesService,
     {
         try
         {
+            _logger.LogInformation($"[CURRENTLY IN]: {nameof(IssuesController)}.{nameof(GetAll)}...");
             var data = await _issuesService.GetAllAsync();
             return Ok(ApiResult<IEnumerable<IssueShortInfo>>.Success(data));
         }

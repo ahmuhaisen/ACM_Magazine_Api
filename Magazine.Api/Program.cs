@@ -28,12 +28,12 @@ app.UseCors("AngularClient");
 
 app.UseStaticFiles();
 
-app.UseSerilogRequestLogging();
-
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseSerilogRequestLogging();
 
 app.MapControllers();
+
+app.UseOutputCache();
 
 app.Run();
