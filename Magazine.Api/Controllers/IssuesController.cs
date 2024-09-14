@@ -3,7 +3,6 @@ using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Domain;
-using Magazine.Application.Services;
 
 namespace Magazine.Api.Controllers;
 

@@ -3,8 +3,7 @@
 public class VolunteerDTO
 {
     public int Id { get; init; }
-    public required string FirstName { get; init; }
-    public required string LastName { get; init; }
+    public required string FullName { get; init; }
     public string? PersonalImagePath { get; init; }
     public string? LinkedInProfileUrl { get; init; }
 }

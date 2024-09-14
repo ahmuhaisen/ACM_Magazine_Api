@@ -29,6 +29,8 @@ public class MappingProfile : Profile
             (opt) => opt.MapFrom(src => $"{FileManager.VolunteersImagesPath}/{src.PersonalImagePath}"));
 
         CreateMap<Volunteer, VolunteerDTO>()
+            .ForMember(dest => dest.FullName,
+            (opt) => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
             .ForMember(dest => dest.PersonalImagePath,
             (opt) => opt.MapFrom(src => $"{FileManager.VolunteersImagesPath}/{src.PersonalImagePath}"));
 
