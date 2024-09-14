@@ -89,9 +89,6 @@ public static class ProgramExtensions
 
     private static void AddCaching(this IServiceCollection services)
     {
-        services.AddOutputCache(options =>
-        {
-            options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromSeconds(15)));
-        });
+        services.AddResponseCaching();
     }
 }

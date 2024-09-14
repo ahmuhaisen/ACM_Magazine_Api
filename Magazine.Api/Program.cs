@@ -34,6 +34,6 @@ app.UseSerilogRequestLogging();
 
 app.MapControllers();
 
-app.UseOutputCache();
+app.UseResponseCaching();
 
 app.Run();

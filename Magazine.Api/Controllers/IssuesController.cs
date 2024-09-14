@@ -10,7 +10,7 @@ namespace Magazine.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[OutputCache]
+[ResponseCache(Duration = 15, VaryByQueryKeys = new string[] { "issueId" })]
 public class IssuesController(IIssuesService _issuesService,
                               IArticlesService _articlesService,
                               ILogger<IssuesController> _logger) : ControllerBase
@@ -34,6 +34,8 @@ public class IssuesController(IIssuesService _issuesService,
     [Route("{issueId:int}")]
     public async Task<IActionResult> GetValue(int issueId)
     {
+        _logger.LogInformation($"[CURRENTLY IN]: {nameof(IssuesController)}.{nameof(GetValue)}...\nIssueId = {issueId}");
+
         try
         {
             var data = await _issuesService.GetByIdAsync(issueId);
