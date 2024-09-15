@@ -5,11 +5,11 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine.Api", "Magazine.Api\Magazine.Api.csproj", "{9977AC73-5960-4105-8591-2AAA25A4A7F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.Domain", "Magazine.Domain\Magazine.Domain.csproj", "{E4A088A1-AB5B-48D4-8E49-2738A0E7028B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine.Domain", "Magazine.Domain\Magazine.Domain.csproj", "{E4A088A1-AB5B-48D4-8E49-2738A0E7028B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.Infrastructure", "Magazine.Infrastructure\Magazine.Infrastructure.csproj", "{E4AB3D61-93AC-476D-A788-2D55D10429B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine.Infrastructure", "Magazine.Infrastructure\Magazine.Infrastructure.csproj", "{E4AB3D61-93AC-476D-A788-2D55D10429B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.Application", "Magazine.Application\Magazine.Application.csproj", "{FB2CF220-4B6D-4F9C-9EB7-C0299698E183}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Magazine.Application", "Magazine.Application\Magazine.Application.csproj", "{FB2CF220-4B6D-4F9C-9EB7-C0299698E183}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

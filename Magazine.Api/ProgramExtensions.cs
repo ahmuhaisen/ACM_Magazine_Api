@@ -5,6 +5,9 @@ using Magazine.Infrastructure.Abstractions;
 using Magazine.Infrastructure.Data;
 using Magazine.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
 
 namespace Magazine.Api;
@@ -90,5 +93,26 @@ public static class ProgramExtensions
     private static void AddCaching(this IServiceCollection services)
     {
         services.AddResponseCaching();
+    }
+
+    private static void AddOpentelemetry(this IServiceCollection services)
+    {
+        services.AddOpenTelemetry()
+            .ConfigureResource(resource => resource.AddService("ACMMagazineApi"))
+            .WithMetrics(metrics =>
+            {
+                metrics.AddAspNetCoreInstrumentation()
+                       .AddHttpClientInstrumentation();
+
+                metrics.AddOtlpExporter();
+            })
+            .WithTracing(tracing =>
+            {
+                tracing.AddAspNetCoreInstrumentation()
+                       .AddHttpClientInstrumentation()
+                       .AddEntityFrameworkCoreInstrumentation();
+
+                tracing.AddOtlpExporter();
+            }); 
     }
 }

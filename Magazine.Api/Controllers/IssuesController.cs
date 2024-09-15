@@ -22,10 +22,12 @@ public class IssuesController(IIssuesService _issuesService,
         {
             _logger.LogInformation($"[CURRENTLY IN]: {nameof(IssuesController)}.{nameof(GetAll)}...");
             var data = await _issuesService.GetAllAsync();
+            _logger.LogInformation($"Successfully returned all issues");
             return Ok(ApiResult<IEnumerable<IssueShortInfo>>.Success(data));
         }
         catch (Exception ex)
         {
+            _logger.LogError("[An Error Occurred while getting all Issues]\nError Message: {ex.Message}", ex.Message);
             return BadRequest(ApiResponse.Failure($"Something went wrong, {ex.Message}"));
         }
     }
