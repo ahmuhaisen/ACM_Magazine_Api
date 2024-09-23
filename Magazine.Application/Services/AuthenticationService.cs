@@ -28,6 +28,7 @@ public class AuthenticationService(
             UserName = request.Email.Substring(0, request.Email.IndexOf("@")),
             FullName = request.FullName,
             UniversityId = request.UniversityId,
+            PhoneNumber = request.PhoneNumber,
         };
 
         var result = await _userManager.CreateAsync(user, request.Password);

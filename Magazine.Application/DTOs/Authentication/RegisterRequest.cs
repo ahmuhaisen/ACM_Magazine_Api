@@ -15,4 +15,7 @@ public class RegisterRequest
 
     [Length(7, 8)]
     public required string UniversityId { get; set; }
+
+    [Phone]
+    public required string PhoneNumber { get; set; }
 }
