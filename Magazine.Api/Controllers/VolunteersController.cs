@@ -1,4 +1,4 @@
-﻿using Magazine.Api.Shared;
+﻿using Magazine.Api.Common;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Domain;

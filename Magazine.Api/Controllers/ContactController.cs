@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-using Magazine.Api.Shared;
 using Magazine.Application.DTOs;
 using Magazine.Application.Abstractions;
+using Magazine.Api.Common;
 
 namespace Magazine.Api.Controllers;
 

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Magazine.Api.Shared;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
 using Magazine.Domain;
 using Microsoft.AspNetCore.OutputCaching;
+using Magazine.Api.Common;
 
 namespace Magazine.Api.Controllers;
 
