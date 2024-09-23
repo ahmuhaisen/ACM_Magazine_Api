@@ -1,21 +1,24 @@
-﻿using Magazine.Application.Abstractions;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+using Magazine.Domain.Entities;
+using Magazine.Infrastructure.Data;
 using Magazine.Application.Profiles;
 using Magazine.Application.Services;
+using Magazine.Application.Abstractions;
 using Magazine.Infrastructure.Abstractions;
-using Magazine.Infrastructure.Data;
 using Magazine.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+
 using Serilog;
 
 namespace Magazine.Api;
 
 public static class ProgramExtensions
 {
-
-
     public static IServiceCollection AddPresentationServices(this IServiceCollection services)
     {
         services.AddSwaggerServices();
@@ -30,6 +33,7 @@ public static class ProgramExtensions
 
         services.AddCaching();
 
+        services.AddUserIdentity();
         return services;
     }
 
@@ -63,6 +67,17 @@ public static class ProgramExtensions
                 .EnableSensitiveDataLogging();
         });
     }
+
+    private static void AddUserIdentity(this IServiceCollection services)
+    {
+        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        {
+            options.SignIn.RequireConfirmedAccount = false;
+        })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+    }
+
 
     private static void AddRepositories(this IServiceCollection services)
     {
@@ -113,6 +128,6 @@ public static class ProgramExtensions
                        .AddEntityFrameworkCoreInstrumentation();
 
                 tracing.AddOtlpExporter();
-            }); 
+            });
     }
 }

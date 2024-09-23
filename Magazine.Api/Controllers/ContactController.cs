@@ -1,8 +1,8 @@
-﻿using Magazine.Api.Shared;
-using Magazine.Application.Abstractions;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using Magazine.Api.Shared;
 using Magazine.Application.DTOs;
-using Magazine.Domain;
-using Microsoft.AspNetCore.Mvc;
+using Magazine.Application.Abstractions;
 
 namespace Magazine.Api.Controllers;
 
@@ -15,7 +15,6 @@ public class ContactController(IMessagesService _messagesService) : ControllerBa
     {
         try
         {
-            await Task.Delay(3000);
             var affectedRows = await _messagesService.CreateAsync(message);
 
             if (affectedRows == 0 || affectedRows == -1)

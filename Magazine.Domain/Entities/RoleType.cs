@@ -1,6 +1,6 @@
 ﻿namespace Magazine.Domain.Entities;
 
-public class Role : IEntity
+public class RoleType : IEntity
 {
     public int Id { get; set; }
 

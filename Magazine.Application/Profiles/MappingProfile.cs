@@ -20,7 +20,7 @@ public class MappingProfile : Profile
             .ForCtorParam("fullName", (opt) => opt.MapFrom(src => $"{src.Volunteer.FirstName} {src.Volunteer.LastName}"))
             .ForCtorParam("personalImageUrl", (opt) => opt.MapFrom(src => $"{FileManager.VolunteersImagesPath}/{src.Volunteer.PersonalImagePath}"))
             .ForCtorParam("linkedInProfileUrl", (opt) => opt.MapFrom(src => src.Volunteer.LinkedInProfileUrl))
-            .ForCtorParam("role", (opt) => opt.MapFrom(src => src.Role.Name));
+            .ForCtorParam("role", (opt) => opt.MapFrom(src => src.RoleType.Name));
 
 
 
@@ -38,7 +38,7 @@ public class MappingProfile : Profile
         CreateMap<Contribution, ContributionDTO>()
             .ForCtorParam("IssueId", (opt) => opt.MapFrom(src => src.IssueId))
             .ForCtorParam("IssueTitle", (opt) => opt.MapFrom(src => src.Issue.Title))
-            .ForCtorParam("Role", (opt) => opt.MapFrom(src => src.Role.Name));
+            .ForCtorParam("Role", (opt) => opt.MapFrom(src => src.RoleType.Name));
 
         CreateMap< PaginatedList<Issue>, PaginatedList<IssueDTO>>();
         CreateMap< PaginatedList<Volunteer>, PaginatedList<VolunteerDTO>>();

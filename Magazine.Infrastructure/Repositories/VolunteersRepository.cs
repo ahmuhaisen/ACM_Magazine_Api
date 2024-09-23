@@ -19,7 +19,7 @@ public class VolunteersRepository : Repository<Volunteer>, IVolunteersRepository
             .Include(x => x.Contributions)
                 .ThenInclude(c => c.Issue)
             .Include(x => x.Contributions)
-                .ThenInclude(c => c.Role)
+                .ThenInclude(c => c.RoleType)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 

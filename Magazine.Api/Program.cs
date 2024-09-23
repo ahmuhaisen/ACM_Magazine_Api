@@ -39,4 +39,8 @@ app.MapControllers();
 
 app.UseResponseCaching();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.Run();

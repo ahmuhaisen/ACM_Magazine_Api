@@ -20,7 +20,7 @@ public class ContributionsRepository : Repository<Contribution>, IContributionsR
             .AsNoTracking()
             .Where(c => c.IssueId == issueId)
             .Include(c => c.Volunteer)
-            .Include(c => c.Role)
+            .Include(c => c.RoleType)
             .ToListAsync();
     }
 
@@ -28,9 +28,9 @@ public class ContributionsRepository : Repository<Contribution>, IContributionsR
     {
         return await _db.Contributions
             .AsNoTracking()
-            .Where(c => c.IssueId == issueId && c.RoleId == roleId)
+            .Where(c => c.IssueId == issueId && c.RoleTypeId == roleId)
             .Include(c => c.Volunteer)
-            .Include(c => c.Role)
+            .Include(c => c.RoleType)
             .ToListAsync();
     }
 }
