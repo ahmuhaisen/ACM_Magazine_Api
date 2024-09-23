@@ -16,7 +16,7 @@ builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 builder.Services
     .AddPresentationServices()
-    .AddApplicationServices()
+    .AddApplicationServices(builder.Configuration)
     .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();

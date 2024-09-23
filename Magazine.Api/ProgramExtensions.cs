@@ -14,6 +14,10 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 using Serilog;
+using Magazine.Application.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Magazine.Api;
 
@@ -37,10 +41,11 @@ public static class ProgramExtensions
         return services;
     }
 
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddServices();
         services.AddAutoMapper(typeof(MappingProfile).Assembly);
+        services.AddJwt(configuration);
         return services;
     }
 
@@ -78,7 +83,6 @@ public static class ProgramExtensions
 
     }
 
-
     private static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IIssuesRepository, IssuesRepository>();
@@ -94,6 +98,7 @@ public static class ProgramExtensions
         services.AddScoped<IVolunteersService, VolunteersService>();
         services.AddScoped<IMessagesService, MessagesService>();
         services.AddScoped<IArticlesService, ArticlesServices>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
     }
 
     private static void AddSwaggerServices(this IServiceCollection services)
@@ -128,6 +133,36 @@ public static class ProgramExtensions
                        .AddEntityFrameworkCoreInstrumentation();
 
                 tracing.AddOtlpExporter();
+            });
+    }
+
+    private static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+
+        var jwtOptions = configuration.GetSection("Jwt").Get<JwtOptions>();
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+            .AddJwtBearer(o =>
+            {
+                o.RequireHttpsMetadata = false;
+                o.SaveToken = true;
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = jwtOptions?.Issuer,
+                    ValidAudience = jwtOptions?.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions?.SigningKey!)),
+                    ClockSkew = TimeSpan.Zero
+                };
             });
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Magazine.Application.Services.Helpers;
+﻿namespace Magazine.Application.Helpers;
 
 
 public class FileManager
