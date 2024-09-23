@@ -1,5 +1,4 @@
-﻿using Azure;
-using Magazine.Application.Abstractions;
+﻿using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +16,7 @@ public class AuthenticationController(IAuthenticationService _authService) : Con
         {
             var response = await _authService.RegisterAsync(request);
 
-            if (response is null || !response.IsAuthenticated) 
+            if (!response.IsAuthenticated) 
                 return BadRequest(response);
 
             return Ok(response);
@@ -30,8 +29,20 @@ public class AuthenticationController(IAuthenticationService _authService) : Con
 
     [HttpPost]
     [Route("/login")]
-    public async Task<IActionResult> login()
+    public async Task<IActionResult> login([FromBody] LoginRequest request)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await _authService.LoginAsync(request);
+
+            if (!response.IsAuthenticated)
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

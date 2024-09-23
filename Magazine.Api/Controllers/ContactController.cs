@@ -2,6 +2,7 @@
 using Magazine.Application.DTOs;
 using Magazine.Application.Abstractions;
 using Magazine.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magazine.Api.Controllers;
 
@@ -28,6 +29,7 @@ public class ContactController(IMessagesService _messagesService) : ControllerBa
     }
 
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
