@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Magazine.Application.Abstractions;
 using Magazine.Application.DTOs;
-using Magazine.Application.Services.Helpers;
+using Magazine.Application.Helpers;
 using Magazine.Domain;
 using Magazine.Infrastructure.Abstractions;
 
